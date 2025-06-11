@@ -1,0 +1,24 @@
+{
+  "name": "travellingapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm start",
+    "client": "cd frontend && npm start",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
+    "server:dev": "cd backend && npm run dev",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["travel", "fullstack", "react", "nodejs", "mongodb"],
+  "author": "",
+  "license": "ISC",
+  "description": "A full-stack traveling app with React frontend and Node.js backend",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
