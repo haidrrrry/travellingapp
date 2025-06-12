@@ -30,12 +30,10 @@ class DatabaseConnection {
         serverSelectionTimeoutMS: 15000,
         socketTimeoutMS: 45000,
         bufferCommands: false,
-        // Explicit authentication settings
-        authSource: 'admin', // Try this if using Atlas
         retryWrites: true,
-        // Handle SSL/TLS
-        ssl: true,
-        sslValidate: true,
+        // TLS/SSL settings for DigitalOcean MongoDB
+        tls: true,
+        // Remove sslValidate - it's not supported in newer MongoDB drivers
       };
 
       // Add CA certificate for DigitalOcean TLS connection if available
