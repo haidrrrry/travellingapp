@@ -15,10 +15,22 @@ class DatabaseConnection {
       console.log('🔄 Connecting to MongoDB...');
       
       // Get connection URI
-      const mongoURI = process.env.DATABASE_URL || process.env.MONGODB_URI;
+      let mongoURI = process.env.DATABASE_URL || process.env.MONGODB_URI;
       
       if (!mongoURI) {
         throw new Error('MongoDB connection URI is not defined in environment variables (DATABASE_URL or MONGODB_URI).');
+      }
+
+      // For DigitalOcean, ensure proper connection string format
+      if (mongoURI.includes('mongo.ondigitalocean.com') && !mongoURI.includes('mongodb+srv://')) {
+        // If it's a standard mongodb:// URI, convert to mongodb+srv://
+        mongoURI = mongoURI.replace('mongodb://', 'mongodb+srv://');
+      }
+
+      // Ensure TLS is enabled for DigitalOcean
+      if (mongoURI.includes('mongo.ondigitalocean.com') && !mongoURI.includes('tls=true')) {
+        const separator = mongoURI.includes('?') ? '&' : '?';
+        mongoURI += `${separator}tls=true`;
       }
 
       // Log sanitized URI for debugging (without password)
@@ -27,13 +39,12 @@ class DatabaseConnection {
 
       const options = {
         maxPoolSize: 10,
-        serverSelectionTimeoutMS: 15000,
+        serverSelectionTimeoutMS: 30000, // Increased timeout for DigitalOcean
         socketTimeoutMS: 45000,
         bufferCommands: false,
         retryWrites: true,
-        // TLS/SSL settings for DigitalOcean MongoDB
-        tls: true,
-        // Remove sslValidate - it's not supported in newer MongoDB drivers
+        // DigitalOcean MongoDB settings
+        authSource: 'admin',
       };
 
       // Add CA certificate for DigitalOcean TLS connection if available
