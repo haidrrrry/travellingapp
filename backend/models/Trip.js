@@ -19,6 +19,20 @@ const tripSchema = new mongoose.Schema({
     type: Date,
     required: [true, 'End date is required']
   },
+  numTravelers: {
+    type: Number,
+    default: 1,
+    min: [1, 'At least 1 traveler is required']
+  },
+  tripType: {
+    type: String,
+    enum: ['adventure', 'beach', 'city', 'mountain', 'cultural', 'nature'],
+    default: 'adventure'
+  },
+  budget: {
+    type: Number,
+    min: [0, 'Budget cannot be negative']
+  },
   notes: {
     type: String,
     maxlength: [500, 'Notes cannot be more than 500 characters']

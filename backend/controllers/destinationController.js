@@ -50,6 +50,18 @@ const createDestination = async (req, res) => {
       data: destination
     });
   } catch (error) {
+    console.error('Destination creation error:', error);
+    
+    // Handle validation errors
+    if (error.name === 'ValidationError') {
+      const validationErrors = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: validationErrors
+      });
+    }
+    
     res.status(500).json({
       success: false,
       message: 'Error creating destination',

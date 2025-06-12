@@ -74,6 +74,9 @@ const createTrip = async (req, res) => {
   try {
     const { tripType, ...tripData } = req.body;
     
+    // Set userId from authenticated user
+    tripData.userId = req.user.id;
+    
     let trip;
     if (tripType) {
       trip = TripFactory.createTripByType(tripType, tripData);
