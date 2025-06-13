@@ -21,6 +21,21 @@ class DatabaseConnection {
         throw new Error('MongoDB connection URI is not defined in environment variables (DATABASE_URL or MONGODB_URI).');
       }
 
+      // Clean up the URI in case it has the variable name prefix (common mistake)
+      if (mongoURI.startsWith('MONGODB_URI=')) {
+        mongoURI = mongoURI.replace('MONGODB_URI=', '');
+        console.log('⚠️  Removed MONGODB_URI= prefix from connection string');
+      }
+      if (mongoURI.startsWith('DATABASE_URL=')) {
+        mongoURI = mongoURI.replace('DATABASE_URL=', '');
+        console.log('⚠️  Removed DATABASE_URL= prefix from connection string');
+      }
+
+      // Validate URI format
+      if (!mongoURI.startsWith('mongodb://') && !mongoURI.startsWith('mongodb+srv://')) {
+        throw new Error('Invalid MongoDB URI format. Must start with mongodb:// or mongodb+srv://');
+      }
+
       // For DigitalOcean, ensure proper connection string format
       if (mongoURI.includes('mongo.ondigitalocean.com') && !mongoURI.includes('mongodb+srv://')) {
         // If it's a standard mongodb:// URI, convert to mongodb+srv://
@@ -90,6 +105,11 @@ class DatabaseConnection {
         console.error('   - Check if password contains special characters that need URL encoding');
         console.error('   - Ensure database user exists and has proper permissions');
         console.error('   - For Atlas: verify IP whitelist includes your server IP');
+      } else if (error.message.includes('Invalid scheme')) {
+        console.error('🔍 URI format troubleshooting:');
+        console.error('   - Ensure URI starts with mongodb:// or mongodb+srv://');
+        console.error('   - Check .env file format: MONGODB_URI=mongodb+srv://...');
+        console.error('   - Verify no extra prefixes in environment variable');
       }
       
       this.isConnected = false;
