@@ -23,7 +23,10 @@ import {
   FaUmbrellaBeach,
   FaCity,
   FaLandmark,
-  FaTree
+  FaTree,
+  FaHeart,
+  FaStar,
+  FaCreditCard
 } from 'react-icons/fa';
 
 // Mock data for demonstration

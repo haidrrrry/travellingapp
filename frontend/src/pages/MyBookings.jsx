@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   FaMapMarkerAlt, 
   FaCalendarAlt, 
@@ -44,12 +44,7 @@ const MyBookings = ({ auth }) => {
     default: '#3b82f6'
   };
 
-  useEffect(() => {
-    if (!auth?.user?.id) return;
-    fetchTrips();
-  }, [auth, fetchTrips]);
-
-  const fetchTrips = async () => {
+  const fetchTrips = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -63,7 +58,12 @@ const MyBookings = ({ auth }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [auth]);
+
+  useEffect(() => {
+    if (!auth?.user?.id) return;
+    fetchTrips();
+  }, [auth, fetchTrips]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {

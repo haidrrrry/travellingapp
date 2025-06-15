@@ -5,122 +5,202 @@ require('dotenv').config();
 const famousDestinations = [
   {
     "name": "Eiffel Tower",
+    "country": "France",
     "location": "Paris, France",
+    "description": "Iconic iron lattice tower on the Champ de Mars in Paris, symbol of France and one of the most recognizable structures in the world.",
+    "category": "cultural",
     "price": 300,
+    "rating": 4.7,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg"
   },
   {
     "name": "Great Wall",
+    "country": "China",
     "location": "Beijing, China",
+    "description": "Ancient fortification system built along the northern borders of China, one of the most impressive architectural feats in human history.",
+    "category": "cultural",
     "price": 450,
+    "rating": 4.8,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/2016_Mutianyu_Great_Wall_02.jpg"
   },
   {
     "name": "Statue of Liberty",
+    "country": "USA",
     "location": "New York, USA",
+    "description": "Neoclassical sculpture on Liberty Island in New York Harbor, a symbol of freedom and democracy for millions of immigrants.",
+    "category": "cultural",
     "price": 350,
+    "rating": 4.6,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Statue_of_Liberty_7.jpg"
   },
   {
     "name": "Colosseum",
+    "country": "Italy",
     "location": "Rome, Italy",
+    "description": "Ancient amphitheater in the center of Rome, the largest ancient amphitheater ever built and a symbol of Imperial Rome.",
+    "category": "cultural",
     "price": 400,
+    "rating": 4.7,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/de/Colosseo_2020.jpg"
   },
   {
     "name": "Machu Picchu",
+    "country": "Peru",
     "location": "Cusco, Peru",
+    "description": "15th-century Inca citadel located on a mountain ridge, one of the most important archaeological sites in South America.",
+    "category": "cultural",
     "price": 500,
+    "rating": 4.9,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Machu_Picchu%2C_Peru.jpg"
   },
   {
     "name": "Sydney Opera House",
+    "country": "Australia",
     "location": "Sydney, Australia",
+    "description": "Multi-venue performing arts center with its distinctive sail-like design, a UNESCO World Heritage Site and Sydney's most famous landmark.",
+    "category": "cultural",
     "price": 370,
+    "rating": 4.6,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Sydney_Opera_House_Sails.jpg"
   },
   {
     "name": "Burj Khalifa",
+    "country": "UAE",
     "location": "Dubai, UAE",
+    "description": "Skyscraper in Dubai, the tallest building in the world, featuring stunning architecture and breathtaking views from its observation deck.",
+    "category": "cities",
     "price": 420,
+    "rating": 4.5,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/93/Burj_Khalifa.jpg"
   },
   {
     "name": "Christ the Redeemer",
+    "country": "Brazil",
     "location": "Rio, Brazil",
+    "description": "Art Deco statue of Jesus Christ in Rio de Janeiro, standing atop Corcovado mountain and overlooking the city.",
+    "category": "cultural",
     "price": 330,
+    "rating": 4.6,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/97/Cristo_Redentor_-_Rio.jpg"
   },
   {
     "name": "Big Ben",
+    "country": "UK",
     "location": "London, UK",
+    "description": "Nickname for the Great Bell of the clock at the north end of the Palace of Westminster, an iconic symbol of London.",
+    "category": "cultural",
     "price": 310,
+    "rating": 4.4,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Elizabeth_Tower_from_London_Eye_-_Sept_2006.jpg"
   },
   {
     "name": "Mount Fuji",
+    "country": "Japan",
     "location": "Honshu, Japan",
+    "description": "Active volcano and the highest mountain in Japan, a sacred site and one of Japan's Three Holy Mountains.",
+    "category": "mountains",
     "price": 390,
+    "rating": 4.8,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/12/Mount_Fuji_from_Hotel_Mt_Fuji.jpg"
   },
   {
     "name": "Santorini",
+    "country": "Greece",
     "location": "Greece",
+    "description": "Volcanic island in the Cyclades group of Greek islands, famous for its stunning sunsets, white-washed buildings, and blue-domed churches.",
+    "category": "beaches",
     "price": 430,
+    "rating": 4.9,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Santorini_-_Thera.jpg"
   },
   {
     "name": "Niagara Falls",
+    "country": "Canada",
     "location": "Ontario, Canada",
+    "description": "Group of three waterfalls at the southern end of Niagara Gorge, one of the most powerful waterfalls in North America.",
+    "category": "nature",
     "price": 340,
+    "rating": 4.5,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Niagara_Falls_2013.jpg"
   },
   {
     "name": "Petra",
+    "country": "Jordan",
     "location": "Ma'an, Jordan",
+    "description": "Ancient Nabatean city carved into red sandstone cliffs, known as the 'Rose City' and one of the New Seven Wonders of the World.",
+    "category": "cultural",
     "price": 460,
+    "rating": 4.7,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/18/Al_Khazneh_Petra_Edit_1.jpg"
   },
   {
     "name": "Banff National Park",
+    "country": "Canada",
     "location": "Alberta, Canada",
+    "description": "Canada's oldest national park, featuring stunning mountain landscapes, turquoise lakes, and abundant wildlife in the Canadian Rockies.",
+    "category": "nature",
     "price": 320,
+    "rating": 4.8,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Lake_Louise_Banff_National_Park.jpg"
   },
   {
     "name": "Taj Mahal",
+    "country": "India",
     "location": "Agra, India",
+    "description": "Ivory-white marble mausoleum in Agra, a UNESCO World Heritage Site and one of the most beautiful buildings in the world.",
+    "category": "cultural",
     "price": 280,
+    "rating": 4.9,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg"
   },
   {
     "name": "Chichen Itza",
+    "country": "Mexico",
     "location": "Yucatan, Mexico",
+    "description": "Large pre-Columbian city built by the Maya people, featuring the iconic El Castillo pyramid and other ancient structures.",
+    "category": "cultural",
     "price": 360,
+    "rating": 4.6,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Chichen_Itza_3.jpg"
   },
   {
     "name": "Angkor Wat",
+    "country": "Cambodia",
     "location": "Siem Reap, Cambodia",
+    "description": "Temple complex in Cambodia and the largest religious monument in the world, originally constructed as a Hindu temple.",
+    "category": "cultural",
     "price": 370,
+    "rating": 4.7,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Angkor_Wat_temple.jpg"
   },
   {
     "name": "Pyramids of Giza",
+    "country": "Egypt",
     "location": "Giza, Egypt",
+    "description": "Ancient Egyptian pyramids including the Great Pyramid, the oldest of the Seven Wonders of the Ancient World.",
+    "category": "cultural",
     "price": 410,
+    "rating": 4.8,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Kheops-Pyramid.jpg"
   },
   {
     "name": "Golden Gate Bridge",
+    "country": "USA",
     "location": "San Francisco, USA",
+    "description": "Suspension bridge spanning the Golden Gate strait, connecting San Francisco to Marin County, an iconic symbol of California.",
+    "category": "cities",
     "price": 300,
+    "rating": 4.5,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0c/GoldenGateBridge-001.jpg"
   },
   {
     "name": "Table Mountain",
+    "country": "South Africa",
     "location": "Cape Town, South Africa",
+    "description": "Flat-topped mountain forming a prominent landmark overlooking the city of Cape Town, offering spectacular views and hiking trails.",
+    "category": "mountains",
     "price": 380,
+    "rating": 4.6,
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Table_Mountain_from_Blaydon%2C_Cape_Town.jpg"
   }
 ];

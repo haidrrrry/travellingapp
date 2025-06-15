@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { 
@@ -56,12 +56,7 @@ const MyNotes = ({ auth }) => {
     default: '#3b82f6'
   };
 
-  useEffect(() => {
-    if (!auth?.user?.id) return;
-    fetchTrips();
-  }, [auth, fetchTrips]);
-
-  const fetchTrips = async () => {
+  const fetchTrips = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -74,7 +69,12 @@ const MyNotes = ({ auth }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [auth]);
+
+  useEffect(() => {
+    if (!auth?.user?.id) return;
+    fetchTrips();
+  }, [auth, fetchTrips]);
 
   const handleEdit = (trip) => {
     setEditId(trip._id);
